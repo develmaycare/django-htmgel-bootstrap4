@@ -1,0 +1,38 @@
+{% comment %}
+Display `list of breadcrumbs`_.
+
+.. _list of breadcrumbs: http://getbootstrap.com/docs/4.0/components/breadcrumb/
+
+``breadcrumbs`` (required): An iterable of breadcrumb objects. Each object is expected to have 2 attributes: The
+``text`` to be displayed and the ``url`` of the crumb. See ``htmgel.library.breadcrumbs``.
+
+``home_text`` (optional): Text to display for the home URL. Default: ``Home`` (translated)
+
+``home_url`` (optional): A link to be displayed as part of the message. Default: ``/``
+
+``include_home`` (optional): Indicates whether the home breacrumb should be included. Default: ``False``
+
+{% endcomment %}
+{% load i18n %}
+
+{% if breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            {% if include_home %}
+                {% trans "Home" as home_x %}
+                <li class="breadcrumb-item">
+                    <a href="{{ home_url|default:"/" }}">{{ home_text|default:home_x }}</a>
+                </li>
+            {% endif %}
+            {% for breacrumb in breacrumbs %}
+                {% if forloop.last %}
+                    <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+                {% else %}
+                    <li class="breadcrumb-item">
+                        <a href="{{ breadcrumb.url}}">{{ breacrumb.text }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+      </ol>
+    </nav>
+{% endif %}

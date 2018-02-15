@@ -1,0 +1,21 @@
+{% load htmgel_tags %}
+
+<div {% if extra_class %}class="{{ extra_class }}"{% endif %}>
+    <label>
+        <input type="checkbox" id="{{ field.id_for_label }}" name="{{ field.name }}" {% if field.value %}checked{% endif %} {% if disabled %}disabled{% endif %}>
+        {{ field.label }}
+        {% if field|is_required %}
+            <span class="text-danger">*</span>
+        {% endif %}
+    </label>
+
+    {% if field.help_text %}
+        <p class="help-block">{{ field.help_text|safe }}</p>
+    {% endif %}
+
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+</div>

@@ -1,0 +1,111 @@
+{% load htmgel_tags %}
+{% load i18n %}
+
+{% if mode == "stacked" %}
+    <div id="formset-{{ formset.prefix }}">
+        {{ formset.management_form }}
+
+        {% if formset.non_form_errors %}
+            {% trans "Problem" as label_x %}
+            {% for error in formset.non_form_errors %}
+                {% include "htmgel/alert.html" with label=label_x message=error %}
+            {% endfor %}
+        {% endif %}
+
+        {% for form in formset %}
+
+            {% include "htmgel/form_errors.html" %}
+
+            <fieldset>
+                <legend>
+                    {% if form.instance.pk %}
+                        {{ form.instance }}
+                    {% else %}
+                        #{{ forloop.counter }}
+                    {% endif %}
+                </legend>
+                {% for field in form %}
+                    {% if field.is_hidden %}
+                        {{ field }}
+                    {% elif field.name == "DELETE" %}
+                        <br>
+                       {{ field }} {% trans "Delete" %}
+                    {% else %}
+                        {% include "htmgel/form_field.html" %}
+                    {% endif %}
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+        {% if include_empty %}
+            <fieldset id="{{ formset.prefix }}-empty-form" style="display: none;">
+                <legend>{{ legend }}</legend>
+                {% for field in formset.empty_form %}
+                    {% if field.is_hidden %}
+                        {{ field }}
+                    {% elif field.name == "DELETE" %}
+                        <br>
+                        {{ field }} {% trans "Delete" %}
+                    {% else %}
+                        {% include "htmgel/form_field.html" %}
+                    {% endif %}
+                {% endfor %}
+            </fieldset>
+        {% endif %}
+    </div>
+{% else %}
+    <div id="{{ css_id|default:"formset" }}">
+        {{ formset.management_form }}
+
+        {% if formset.non_form_errors %}
+            {% trans "Problem" as label_x %}
+            {% for error in formset.non_form_errors %}
+                {% include "htmgel/alert.html" with label=label_x message=error %}
+            {% endfor %}
+        {% endif %}
+
+        <table class="table">
+            <thead>
+                {% for form in formset %}
+                    {% if forloop.first %}
+                        <tr>
+                            {% for field in form %}
+                                {% if not field.is_hidden %}
+                                    <th {% if field.field.required %}class="required"{% endif %}>
+                                        {{ field.label }} {% if field.field.required %}*{% endif %}
+                                        {% if field.help_text %}
+                                            <span title="{{ field.help_text }}" data-toggle="tooltip" data-placement="right">
+                                                {% icon "question-sign" framework="glyphicon"%}
+                                            </span>
+                                        {% endif %}
+                                    </th>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for form in formset %}
+                    <tr {% if form.errors %}class="danger"{% endif %} data-formset-form>
+                        {% for field in form %}
+                            {% if field.is_hidden %}
+                                {{ field }}
+                            {% else %}
+                                <td {% if field.name == "DELETE" %}class="text-center"{% endif %}>
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        <br>
+                                        {% for error in field.errors %}
+                                            {{ error|escape }}
+                                        {% endfor %}
+                                    {% endif %}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endif %}

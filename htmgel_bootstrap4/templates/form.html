@@ -1,0 +1,42 @@
+{% load i18n %}
+
+<form class="form-{{ form_class|default:"horizontal" }}" action="{{ action }}" method="{{ method|default:"post" }}"{% if multipart %} enctype="multipart/form-data"{% endif %}>
+
+    {% include "htmgel/form_errors.html" %}
+
+    {% csrf_token %}
+
+    {% if form.has_fieldsets %}
+        {% for fieldset in form.fieldsets %}
+            <fieldset>
+                <legend>{{ fieldset.legend }}</legend>
+                {% if fieldset.description %}
+                    <p>{{ fieldset.description }}</p>
+                {% endif %}
+                {% for field in fieldset.fields %}
+                    {% include "htmgel/form_field.html"%}
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+    {% else %}
+        {% for field in form %}
+            {% include "htmgel/form_field.html" %}
+        {% endfor %}
+    {% endif %}
+
+    {% if formsets %}
+        {% for formset in formsets %}
+            {% include "htmgel/formset.html" %}
+        {% endfor %}
+    {% endif %}
+
+    <div class="form-group">
+        <p>
+            <button type="submit" class="btn btn-primary">{% trans "Submit" %}</button>
+            {% if cancel_url %}
+                &nbsp; <a href="{{ cancel_url }}">{% trans "Cancel" %}</a>
+            {% endif %}
+        </p>
+    </div>
+
+</form>

@@ -1,0 +1,61 @@
+{% comment %}
+Display an `alert box`_.
+
+.. _alert box: http://getbootstrap.com/docs/4.0/components/alerts
+
+``enable_close`` (optional): Make the alert dissmissable.
+
+``extra_message`` (optional): Used only with additional content.
+
+``heading`` (optional): Used to invoke `additional alert content`_.
+
+.. _additional alert content: http://getbootstrap.com/docs/4.0/components/alerts/#additional-content
+
+``label`` (optional): A label appearing before the message.
+
+``link`` (optional): A link to be displayed as part of the message.
+
+``link_text`` (optional): Text to display for the link. Default: ``More`` (translated)
+
+``message`` (required): The message to be displayed.
+
+``status`` (optional): The status of the message controls the context color. Default: ``danger``
+
+{% endcomment %}
+{% load i18n %}
+
+{% trans "More" as link_text_x %}
+
+<div class="alert alert-{{ status|default:"danger" }} {% if enable_close %}alert-dismissible fade show{% endif %}" role="alert">
+    {% if heading %}
+        <h4 class="alert-heading">{{ heading }}</h4>
+        <p>
+
+            {% if label %}<strong>{{ label }}</strong>{% endif %}
+
+            {{ message }}
+
+            {% if link %}
+                <a href="{{ link }}">{{ link_text|default:link_text_x }}</a>
+            {% endif %}
+
+        </p>
+        {% if extra_message %}
+            <hr>
+            <p>{{ extra_message }}</p>
+        {% endif %}
+    {% else %}
+        {% if label %}<strong>{{ label }}</strong>{% endif %}
+        {{ message }}
+
+        {% if link %}
+            <a href="{{ link }}">{{ link_text|default:link_text_x }}</a>
+        {% endif %}
+    {% endif %}
+
+    {% if enable_close %}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    {% endif %}
+</div>

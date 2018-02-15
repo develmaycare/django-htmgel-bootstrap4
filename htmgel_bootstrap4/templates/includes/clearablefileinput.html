@@ -1,0 +1,23 @@
+{% load htmgel_tags %}
+
+<div class="form-group{% if field.errors %} has-error{% endif %} {% if extra_class %}{{ extra_class }}{% endif %}">
+    <label for="{{ field.id_for_label }}" class="control-label">
+        {{ field.label }}
+        {% if field|is_required %}
+            <span class="text-danger">*</span>
+        {% endif %}
+    </label>
+
+    {{ field }}
+
+    {% if field.help_text %}
+        <p class="help-block">{{ field.help_text|safe }}</p>
+    {% endif %}
+
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+
+</div>

@@ -1,0 +1,16 @@
+{% comment %}
+No longer officially part of Bootstrap 4.
+
+``subtitle`` (optional): The page subtitle.
+
+``title`` (required): The page title.
+
+{% endcomment %}
+<h1>
+    {{ title }}
+    {% if subtitle %}
+        <small>
+            {{ subtitle }}
+        </small>
+    {% endif %}
+</h1>

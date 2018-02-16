@@ -4,7 +4,7 @@
 {% trans "Cancel" as cancel_x %}
 <div class="form-group">
     <p>
-        <button type="submit" class="btn btn-primary">{{ button_text|default:submit_x }}</button>
+        <button type="submit" class="btn btn-primary">{{ submit_text|default:submit_x }}</button>
         {% if cancel_url %}
             &nbsp; <a href="{{ cancel_url }}">{{ cancel_text|default:cancel_x }}</a>
         {% endif %}

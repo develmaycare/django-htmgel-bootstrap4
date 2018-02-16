@@ -24,12 +24,12 @@ Display `list of breadcrumbs`_.
                     <a href="{{ home_url|default:"/" }}">{{ home_text|default:home_x }}</a>
                 </li>
             {% endif %}
-            {% for breacrumb in breacrumbs %}
+            {% for breadcrumb in breadcrumbs %}
                 {% if forloop.last %}
                     <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
                 {% else %}
                     <li class="breadcrumb-item">
-                        <a href="{{ breadcrumb.url}}">{{ breacrumb.text }}</a>
+                        <a href="{{ breadcrumb.url}}">{{ breadcrumb.text }}</a>
                     </li>
                 {% endif %}
             {% endfor %}

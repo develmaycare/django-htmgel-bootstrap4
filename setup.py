@@ -22,7 +22,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "BeautifulSoup",
-        "django-htmgel",
+        # "django-htmgel",
     ],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',

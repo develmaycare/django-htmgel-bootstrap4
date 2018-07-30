@@ -11,7 +11,7 @@
 {% elif form.errors %}
     <div class="form-errors">
         {% trans "Error" as label_x %}
-        {% trans "Please correct the problems below." as mesage_x %}
+        {% trans "Please correct the problems below." as message_x %}
         {% include "htmgel/alert.html" with enable_close=True label=label_x message=message_x %}
     </div>
 {% else %}

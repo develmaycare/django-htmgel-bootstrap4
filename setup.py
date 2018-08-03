@@ -23,7 +23,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "BeautifulSoup",
+        "bs4",
         # "django-htmgel",
     ],
     classifiers=[
@@ -40,6 +40,6 @@ setup(
         'Framework :: Django',
     ],
     zip_safe=False,
-    tests_require=["BeautifulSoup"],
+    tests_require=["bs4"],
     test_suite='runtests.runtests'
 )

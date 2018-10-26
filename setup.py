@@ -4,17 +4,19 @@
 from setuptools import setup, find_packages
 
 
-def read(path):
+def read_file(path):
     with open(path, "r") as f:
         contents = f.read()
         f.close()
+
     return contents
+
 
 setup(
     name='django-htmgel-bootstrap4',
-    version=read("VERSION.txt"),
-    description=read("DESCRIPTION.txt"),
-    long_description=read("README.markdown"),
+    version=read_file("VERSION.txt"),
+    description=read_file("DESCRIPTION.txt"),
+    long_description=read_file("README.markdown"),
     author='Shawn Davis',
     author_email='shawn@develmaycare.com',
     url='https://github.com/develmaycare/django-htmgel-bootstrap4',

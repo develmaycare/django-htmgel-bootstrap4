@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 
 def read(path):
-    with open(path, "rb") as f:
+    with open(path, "r") as f:
         contents = f.read()
         f.close()
     return contents
@@ -21,7 +21,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "BeautifulSoup",
+        "bs4",
         # "django-htmgel",
     ],
     classifiers=[
@@ -30,14 +30,12 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Framework :: Django',
     ],
     zip_safe=False,
-    tests_require=["BeautifulSoup"],
+    tests_require=["bs4"],
     test_suite='runtests.runtests'
 )

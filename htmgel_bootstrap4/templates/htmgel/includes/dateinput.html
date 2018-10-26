@@ -9,7 +9,7 @@
     </label>
 
     <div class="input-group date">
-        <input type="text" id="{{ field.id_for_label }}" class="form-control" name="{{ field.html_name }}"
+        <input type="text" id="{{ field.id_for_label }}" class="form-control" name="{{ field.html_name }}" autocomplete="off"
                value="{{ field.value|date:"Y-m-d"|default_if_none:"" }}" {% if disabled %}disabled{% endif %}>
         <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
